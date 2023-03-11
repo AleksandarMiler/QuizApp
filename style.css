@@ -1,0 +1,20 @@
+body {
+    height: 100vh;
+    background-color: rgb(213, 218, 157) !important;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    padding-bottom: 12px;
+}
