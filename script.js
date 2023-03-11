@@ -66,17 +66,20 @@ let currentQuestion = 0;
 
 function init() {
     document.getElementById('allQuestions').innerHTML = questions.length;
+    
     showQuestion();
 }
 
 function showQuestion() {
     let question = questions[currentQuestion];
     document.getElementById('questionText').innerHTML = question['question'];
-
+    document.getElementById('numberOfQuestion').innerHTML = currentQuestion + 1;
+    
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
+    
 }
 
 function answer(selection) {
@@ -99,4 +102,27 @@ function answer(selection) {
     }
 
     document.getElementById('next-Question').disabled = false;
+}
+
+function nextQuestion() {
+   currentQuestion++;
+   document.getElementById('next-Question').disabled = true;
+   showQuestion(); 
+   removeClassButtons();
+}
+
+
+
+function removeClassButtons(){
+    document.getElementById('answer_1').parentNode.classList.remove('bg-info');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-secondary');
+
+    document.getElementById('answer_2').parentNode.classList.remove('bg-info');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-secondary');
+
+    document.getElementById('answer_3').parentNode.classList.remove('bg-info');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-secondary');
+
+    document.getElementById('answer_4').parentNode.classList.remove('bg-info');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-secondary');
 }
