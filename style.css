@@ -23,3 +23,20 @@ body {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.04);
 }
+
+.picture {
+    width: 30rem !important;
+    height: 40rem !important;
+}
+
+.quiz-end-cont {
+    display: flex;
+    justify-content: center;
+}
+
+.result {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

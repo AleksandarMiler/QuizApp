@@ -63,23 +63,37 @@ let questions = [
     }
 ];
 let currentQuestion = 0;
+let rightAnswer = 0;
 
 function init() {
     document.getElementById('allQuestions').innerHTML = questions.length;
+    document.getElementById('rightAnswerNumber').innerHTML = rightAnswer;
     
     showQuestion();
 }
 
 function showQuestion() {
+    if (currentQuestion >= questions.length) {
+     // to do show endscreen 
+     document.getElementById('endScreen').style = "display: unset " ; // zeigt EndScreen DialogBox
+     document.getElementById('questionBody').style = "display: none" ; // versteckt Questions DialogBox
+     document.getElementById('picture').src = "img/pexels-anna-shvets-6250946.jpg"; //zeigt neues Bild wenn das Spiel zu Ende ist
+     document.getElementById('picture').classList.add('picture'); // das Bild bekommt css Einstellungen
+
+     document.getElementById('rightAnswerNumber').innerHTML = rightAnswer;  // Zahl der richtigbeantworteten FRagen wird angezeigt
+
+    } else {
     let question = questions[currentQuestion];
-    document.getElementById('questionText').innerHTML = question['question'];
-    document.getElementById('numberOfQuestion').innerHTML = currentQuestion + 1;
+    document.getElementById('numberOfQuestion').innerHTML = currentQuestion + 1;  // Zahl an welcher Frage wir uns mommentan befinden wird angezeigt
+
+    document.getElementById('questionText').innerHTML = question['question'];  // Frage aus JSON wird angezeigt
     
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
+
+    document.getElementById('answer_1').innerHTML = question['answer_1'];  // die nächste Fragen werden angezeigt
     document.getElementById('answer_2').innerHTML = question['answer_2'];
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
-    
+    }
 }
 
 function answer(selection) {
@@ -87,33 +101,34 @@ function answer(selection) {
     // document.getElementById(selection).innerHTML = question['answer_1'];
     console.log('current Question is', selection); 
     console.log('current Question is', question['rightAnswer']);
-    let selectedQuestionNumber = selection.slice(-1); 
+    let selectedQuestionNumber = selection.slice(-1);        // wir entnehmen dass letzte Symbol aus angeklikter Antwort
     console.log('selectedQuestionNumber is', selectedQuestionNumber);
-    let idOfRightAnswer = `answer_${question['rightAnswer']}`; 
+    let idOfRightAnswer = `answer_${question['rightAnswer']}`;   //  das letzte Symbol aus Id wird zum Variable
     if (question['rightAnswer'] == selectedQuestionNumber) {
         //to do
         console.log('Right Answer, you are great!!!')
-        document.getElementById(selection).parentNode.classList.add('bg-info');
+        document.getElementById(selection).parentNode.classList.add('bg-info');      // hintergrund der richtigbeantworteten Frage wird gewechselt
+        rightAnswer++;                      // Zahl der richtigbeantworteten Fragen wird um eins erhöht
     } else {
         // to do
         console.log('Wrong Answer, try again!!!');
-        document.getElementById(selection).parentNode.classList.add('bg-secondary');
+        document.getElementById(selection).parentNode.classList.add('bg-secondary');   // hintergrund der falschbeantworteten Frage wird gewechselt
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-info');
     }
 
-    document.getElementById('next-Question').disabled = false;
+    document.getElementById('next-Question').disabled = false;     // Knopf um nächste Gruppe der Fragen anzuzeigen wird wieder aktiviviert
 }
 
-function nextQuestion() {
-   currentQuestion++;
-   document.getElementById('next-Question').disabled = true;
+function nextQuestion() {    
+   currentQuestion++;                  // die nächste Gruppe der Fragen, bzw. nächstes Object aus JSON wird angezeigt
+   document.getElementById('next-Question').disabled = true;  // Knopf um nächste Gruppe der Fragen anzuzeigen wird wieder deaktiviviert
    showQuestion(); 
    removeClassButtons();
 }
 
 
 
-function removeClassButtons(){
+function removeClassButtons(){                      //alle Eigenschafften der Fragen werden entfernt
     document.getElementById('answer_1').parentNode.classList.remove('bg-info');
     document.getElementById('answer_1').parentNode.classList.remove('bg-secondary');
 
