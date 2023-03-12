@@ -40,3 +40,8 @@ body {
     justify-content: center;
     margin-top: 20px;
 }
+
+.progress-bar {
+background-color: rgb(213, 218, 157) !important; 
+}
+
